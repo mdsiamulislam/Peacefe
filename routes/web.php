@@ -2,6 +2,35 @@
 
 use Illuminate\Support\Facades\Route;
 
+
+Route::get('/admin', function () {
+    return view('admin.auth.index');
+});
+
+Route::get('/admin/articles', function () {
+    return view('admin.content.article.index');
+});
+
+Route::get('/admin/article/new', function () {
+    return view('admin.content.article.new_article');
+})->name('new_article');
+
+Route::get('/admin/videos', function () {
+    return view('admin.content.video.index');
+});
+
+Route::get('/admin/video/new', function () {
+    return view('admin.content.video.new_video');
+})->name('new_video');
+
+Route::get('/admin/wisdoms', function () {
+    return view('admin.wisdom.index');
+});
+Route::get('/admin/wisdom/new', function () {
+    return view('admin.wisdom.new_wisdom');
+})->name('new_wisdom');
+
+
 Route::get('/', function () {
 
     $listOfWisdom = [
