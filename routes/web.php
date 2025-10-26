@@ -7,6 +7,10 @@ Route::get('/admin', function () {
     return view('admin.auth.index');
 });
 
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard.index');
+});
+
 Route::get('/admin/articles', function () {
     return view('admin.content.article.index');
 });
