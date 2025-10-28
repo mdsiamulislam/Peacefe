@@ -13,112 +13,44 @@
             </div>
 
             <div class="row g-4">
+                @foreach($wisdoms as $wisdom)
                 <div class="col-md-6">
                     <div class="card shadow-sm h-100">
                         <div class="card-body">
                             <blockquote class="blockquote mb-3">
-                                <p class="fst-italic">"The best among you are those who have the best manners and character."</p>
-                                <footer class="blockquote-footer">Prophet (PBUH)</footer>
+                                <p class="fst-italic">{{ $wisdom->content }}</p>
+                                <footer class="blockquote-footer">{{ $wisdom->author }}</footer>
                             </blockquote>
                         </div>
-                        <div class="card-footer bg-white border-top">
-                            <button class="btn btn-sm btn-outline-primary me-2" onclick="editWisdom(1)">Edit</button>
-                            <button class="btn btn-sm btn-outline-danger" onclick="deleteWisdom(1)">Delete</button>
+                        <div class="card-footer bg-white border-top d-flex justify-content-end gap-2">
+                            <button class="btn btn-sm btn-outline-primary">Edit</button>
+                            <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $wisdom->id }}">Delete</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-6">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body">
-                            <blockquote class="blockquote mb-3">
-                                <p class="fst-italic">"Seek knowledge from the cradle to the grave."</p>
-                                <footer class="blockquote-footer">Muhammad (PBUH)</footer>
-                            </blockquote>
-                        </div>
-                        <div class="card-footer bg-white border-top">
-                            <button class="btn btn-sm btn-outline-primary me-2" onclick="editWisdom(2)">Edit</button>
-                            <button class="btn btn-sm btn-outline-danger" onclick="deleteWisdom(2)">Delete</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body">
-                            <blockquote class="blockquote mb-3">
-                                <p class="fst-italic">"The ink of the scholar is more sacred than the blood of the martyr."</p>
-                                <footer class="blockquote-footer">(PBUH)</footer>
-                            </blockquote>
-                        </div>
-                        <div class="card-footer bg-white border-top">
-                            <button class="btn btn-sm btn-outline-primary me-2" onclick="editWisdom(3)">Edit</button>
-                            <button class="btn btn-sm btn-outline-danger" onclick="deleteWisdom(3)">Delete</button>
+                <!-- Delete Confirmation Modal for each wisdom -->
+                <div class="modal fade" id="deleteModal{{ $wisdom->id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ $wisdom->id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteModalLabel{{ $wisdom->id }}">Confirm Delete</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to delete this wisdom? This action cannot be undone.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <a href="{{ route('admin.wisdom.delete', ['id' => $wisdom->id]) }}" class="btn btn-danger">Delete</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-6">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body">
-                            <blockquote class="blockquote mb-3">
-                                <p class="fst-italic">"Kindness is a mark of faith, and whoever is not kind has no faith."</p>
-                                <footer class="blockquote-footer">Prophet Muhammad (PBUH)</footer>
-                            </blockquote>
-                        </div>
-                        <div class="card-footer bg-white border-top">
-                            <button class="btn btn-sm btn-outline-primary me-2" onclick="editWisdom(4)">Edit</button>
-                            <button class="btn btn-sm btn-outline-danger" onclick="deleteWisdom(4)">Delete</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Delete Confirmation Modal -->
-        <div class="modal fade" id="deleteModal" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Confirm Delete</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        Are you sure you want to delete this wisdom? This action cannot be undone.
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-danger" id="confirmDelete">Delete</button>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-        <script>
-            let deleteModal;
-            let wisdomToDelete;
-
-            document.addEventListener('DOMContentLoaded', function() {
-                deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-            });
-
-            function editWisdom(id) {
-                alert('Edit wisdom ID: ' + id + '\n\nIn production, this would redirect to the edit page.');
-                // window.location.href = '/edit-wisdom/' + id;
-            }
-
-            function deleteWisdom(id) {
-                wisdomToDelete = id;
-                deleteModal.show();
-            }
-
-            document.getElementById('confirmDelete').addEventListener('click', function() {
-                alert('Wisdom ID ' + wisdomToDelete + ' deleted successfully!');
-                deleteModal.hide();
-                // In production, send delete request to server
-                // Then remove the card from page or reload
-            });
-        </script>
     </body>
 </x-adminnav>

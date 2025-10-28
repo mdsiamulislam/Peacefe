@@ -23,13 +23,17 @@ Route::get('/admin/dashboard', function () {
     return view('admin.dashboard.index');
 })->name('admin.dashboard');
 
-Route::get('/admin/articles', function () {
-    return view('admin.content.article.index');
-});
+Route::get('/admin/articles', [ArticleController::class, 'getArticlesForAdmin'])->name('admin.articles');
+Route::get('/admin/article/delete/{id}', [ArticleController::class, 'deleteArticle'])->name('admin.article.delete');
+Route::post('/admin/article/create', [ArticleController::class, 'createArticle'])->name('admin.article.create');
+Route::put('/admin/article/update/{id}', [ArticleController::class, 'updateArticle'])->name('admin.article.update');
+
+Route::get('/admin/article/{id}', [ArticleController::class, 'getArticleForAdmin'])->name('admin.article.editview');
 
 Route::get('/admin/article/new', function () {
     return view('admin.content.article.new_article');
 })->name('new_article');
+
 
 Route::get('/admin/videos', function () {
     return view('admin.content.video.index');
@@ -39,9 +43,11 @@ Route::get('/admin/video/new', function () {
     return view('admin.content.video.new_video');
 })->name('new_video');
 
-Route::get('/admin/wisdoms', function () {
-    return view('admin.wisdom.index');
-});
+Route::get('/admin/wisdoms', [WisdomController::class, 'showWisdomForAdmin'])->name('admin.wisdoms');
+Route::post('/admin/wisdom/create', [WisdomController::class, 'createWisdom'])->name('admin.wisdom.create');
+Route::get('/admin/wisdom/delete/{id}', [WisdomController::class, 'deleteWisdom'])->name('admin.wisdom.delete');
+Route::put('/admin/wisdom/update/{id}', [WisdomController::class, 'updateWisdom'])->name('admin.wisdom.update');
+
 Route::get('/admin/wisdom/new', function () {
     return view('admin.wisdom.new_wisdom');
 })->name('new_wisdom');

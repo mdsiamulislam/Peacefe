@@ -26,75 +26,34 @@
                                 </tr>
                             </thead>
                             <tbody id="articlesTable">
+                                @foreach ($articles as $article)
                                 <tr>
                                     <td>
-                                        <img src="https://images.unsplash.com/photo-1512632578888-169bbbc64f33?w=100&h=100&fit=crop"
+                                        <img src="{{ $article->image_url }}"
                                             class="rounded"
                                             width="60"
                                             height="60"
                                             alt="Article">
                                     </td>
                                     <td>
-                                        <div class="fw-semibold">The Role of Women in Islam</div>
-                                        <small class="text-muted">An examination of the status and rights...</small>
+                                        <div class="fw-semibold">{{ $article->title }}</div>
+                                        <small class="text-muted">{{ $article->subtitle }}</small>
                                     </td>
-                                    <td>Admin</td>
-                                    <td>2023-11-05</td>
+                                    <td>{{ $article->author }}</td>
+                                    <td>{{ $article->created_at }}</td>
                                     <td>
-                                        <button class="btn btn-sm btn-outline-primary me-1" onclick="editArticle(1)">
+                                        <button class="btn btn-sm btn-outline-primary me-1" onclick="location.href='{{ route('admin.article.editview', ['id' => $article->id]) }}';">
                                             Edit
                                         </button>
-                                        <button class="btn btn-sm btn-outline-danger" onclick="deleteArticle(1)">
+                                        <button
+                                            class="btn btn-sm btn-outline-danger"
+                                            onclick="location.href='{{ route('admin.article.delete', ['id' => $article->id]) }}';">
                                             Delete
                                         </button>
+
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=100&h=100&fit=crop"
-                                            class="rounded"
-                                            width="60"
-                                            height="60"
-                                            alt="Article">
-                                    </td>
-                                    <td>
-                                        <div class="fw-semibold">Understanding Prayer in Islam</div>
-                                        <small class="text-muted">A comprehensive guide to daily prayers...</small>
-                                    </td>
-                                    <td>Admin</td>
-                                    <td>2023-11-03</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary me-1" onclick="editArticle(2)">
-                                            Edit
-                                        </button>
-                                        <button class="btn btn-sm btn-outline-danger" onclick="deleteArticle(2)">
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=100&h=100&fit=crop"
-                                            class="rounded"
-                                            width="60"
-                                            height="60"
-                                            alt="Article">
-                                    </td>
-                                    <td>
-                                        <div class="fw-semibold">The Importance of Charity</div>
-                                        <small class="text-muted">Exploring the concept of Zakat and Sadaqah...</small>
-                                    </td>
-                                    <td>Admin</td>
-                                    <td>2023-11-01</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary me-1" onclick="editArticle(3)">
-                                            Edit
-                                        </button>
-                                        <button class="btn btn-sm btn-outline-danger" onclick="deleteArticle(3)">
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -129,11 +88,6 @@
             document.addEventListener('DOMContentLoaded', function() {
                 deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
             });
-
-            function editArticle(id) {
-                alert('Edit article ID: ' + id + '\n\nIn production, this would redirect to the edit page.');
-                // window.location.href = '/edit-article/' + id;
-            }
 
             function deleteArticle(id) {
                 articleToDelete = id;
