@@ -11,7 +11,12 @@ Route::get('/admin', function () {
     return view('admin.auth.index');
 });
 
+Route::get('/admin/createadmin', function () {
+    return view('admin.auth.addadmin');
+})->name('admin.createAdmin');
+
 Route::post('/admin/addadmin', [UserController::class, 'addAdmin'])->name('admin.add');
+Route::post('/admin/login', [UserController::class, 'login'])->name('admin.login');
 Route::get('/admin/deletealladmins', [UserController::class, 'deleteAllUsers']);
 
 Route::get('/admin/dashboard', function () {
