@@ -14,6 +14,10 @@ class HeroVideoSeeder extends Seeder
      */
     public function run(): void
     {
+
+        // Clear old data first
+        DB::table('herovideos')->truncate();
+
         $json = File::get(path: 'database/json/hero_video.json');
         $listOfHeroVideos = json_decode($json, true);
 

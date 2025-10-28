@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\WisdomController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,7 @@ Route::get('/admin/wisdoms', function () {
 Route::get('/admin/wisdom/new', function () {
     return view('admin.wisdom.new_wisdom');
 })->name('new_wisdom');
+
 
 
 Route::get('/', [WisdomController::class, 'showWisdom']);
@@ -79,27 +81,5 @@ Route::get('/video', function () {
     return view('video.index', ['categories' => $listOfCategories, 'videos' => $listOfVideos]);
 });
 
-Route::get('/article', function () {
-
-    $listOfArticles = [
-        [
-            'date' => '2023-10-15',
-            'author' => 'Admin',
-            'title' => 'The Importance of Compassion in Islam',
-            'summary' => 'An exploration of how compassion is emphasized in Islamic teachings and its impact on society.',
-            'image_url' => 'https://images.unsplash.com/photo-1542816417-0983c9c9ad53?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1470',
-            'url' => '/article/compassion-in-islam'
-        ],
-        [
-            'date' => '2023-11-05',
-            'author' => 'Admin',
-            'title' => 'The Role of Women in Islam',
-            'summary' => 'An examination of the status and rights of women in Islamic teachings.',
-            'image_url' => 'https://images.unsplash.com/photo-1512632578888-169bbbc64f33?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1470',
-            'url' => '/article/role-of-women-in-islam'
-        ]
-    ];
-
-
-    return view('article.index', ['articles' => $listOfArticles]);
-});
+Route::get('/article', [ArticleController::class, 'getArticles']);
+Route::get('/article/{id}', [ArticleController::class, 'getArticle'])->name('article.details');

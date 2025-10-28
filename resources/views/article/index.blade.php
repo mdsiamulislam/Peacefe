@@ -10,24 +10,26 @@
                         <div
                             class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
                             style="
-                                background-image: url('{{ $article['image_url'] }}');
+                                background-image: url('{{ $article->image_url }}');
                             "></div>
                         <div class="flex flex-col gap-2">
                             <p class="text-gray-600 dark:text-gray-400 text-sm">
-                                {{ $article['author'] }} &middot; {{ $article['date'] }}
+                                {{ $article->author }} &middot; {{ $article->created_at }}
                             </p>
                             <p
                                 class="text-text-light dark:text-white text-lg font-bold leading-tight">
-                                {{ $article['title'] }}
+                                {{ $article->title }}
                             </p>
                             <p class="text-gray-600 dark:text-gray-400 text-sm">
-                                {{ $article['summary'] }}
+                                {{ $article->subtitle }}
                             </p>
                         </div>
                         <button
+                            onclick="location.href='{{ route('article.details', ['id' => $article->id]) }}';"
                             class="flex items-center justify-center rounded-lg h-8 px-4 bg-primary/20 text-primary text-sm font-medium w-fit">
                             <span>Read More</span>
                         </button>
+
                     </div>
                 </div>
                 @endforeach
