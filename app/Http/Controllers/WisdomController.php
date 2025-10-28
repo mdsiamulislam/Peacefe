@@ -14,6 +14,13 @@ class WisdomController extends Controller
         return view('index', ['wisdoms' => $wisdoms, 'videos' => $listOfVideos]);
     }
 
+    // Show individual wisdom method can be added here
+    public function showWisdomDetail($id)
+    {
+        $wisdom = DB::table('wisdoms')->where('id', $id)->first();
+        return view('admin.wisdom.new_wisdom', ['wisdom' => $wisdom]);
+    }
+
     public function showWisdomForAdmin()
     {
         $wisdoms = DB::table('wisdoms')->get();

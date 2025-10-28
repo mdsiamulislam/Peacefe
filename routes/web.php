@@ -48,6 +48,7 @@ Route::post('/admin/wisdom/create', [WisdomController::class, 'createWisdom'])->
 Route::get('/admin/wisdom/delete/{id}', [WisdomController::class, 'deleteWisdom'])->name('admin.wisdom.delete');
 Route::put('/admin/wisdom/update/{id}', [WisdomController::class, 'updateWisdom'])->name('admin.wisdom.update');
 
+Route::get('/admin/wisdom/{id}', [WisdomController::class, 'showWisdomDetail'])->name('admin.wisdom.edit');
 Route::get('/admin/wisdom/new', function () {
     return view('admin.wisdom.new_wisdom');
 })->name('new_wisdom');
