@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link rel="icon" type="image/svg+xml" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="green"><g transform="translate(48 0) scale(-1 1)"><path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z"/></g></svg>' />
     <title>Peacefe - Discover Islam</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
@@ -50,9 +51,12 @@
                     <div class="flex items-center justify-between py-4">
                         <div class="flex items-center gap-4">
                             <div class="size-8 text-primary">
-                                <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+                                <svg fill="green" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                    <g transform="translate(48 0) scale(-1 1)">
+                                        <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor" />
+                                    </g>
                                 </svg>
+
                             </div>
                             <h2 class="text-xl font-bold leading-tight">Peacefe</h2>
                         </div>
