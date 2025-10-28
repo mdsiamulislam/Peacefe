@@ -47,4 +47,51 @@
         </div>
     </main>
 
+    <body class="bg-light">
+
+        <!-- TOAST: place at top of body -->
+        <div class="position-fixed top-0 end-0 p-3" style="z-index: 1055">
+            @if(session('success'))
+            <div class="toast align-items-center text-bg-success border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        {{ session('success') }}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+            @endif
+
+            @if(session('error'))
+            <div class="toast align-items-center text-bg-danger border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        {{ session('error') }}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+            @endif
+        </div>
+
+        <div class="container">
+            <!-- your existing admin form/content -->
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+                toastElList.map(function(toastEl) {
+                    var toast = new bootstrap.Toast(toastEl, {
+                        delay: 3000
+                    })
+                    toast.show()
+                })
+            })
+        </script>
+
+    </body>
+
 </x-adminnav>

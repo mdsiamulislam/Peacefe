@@ -11,7 +11,6 @@ class VideoController extends Controller
     {
         $listOfVideos = DB::table('videos')->get();
         $listOfCategories = DB::table('videos')->select('category')->distinct()->get()->pluck('category');
-
         return view('video.index', ['categories' => $listOfCategories, 'videos' => $listOfVideos]);
     }
 }
