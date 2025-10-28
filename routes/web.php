@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\WisdomController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -35,47 +36,8 @@ Route::get('/admin/wisdom/new', function () {
 })->name('new_wisdom');
 
 
-Route::get('/', function () {
+Route::get('/', [WisdomController::class, 'showWisdom']);
 
-    $listOfWisdom = [
-        [
-            'quote' => 'The best among you are those who have the best manners and character.',
-            'source' => 'Prophet (PBUH)'
-        ],
-        [
-            'quote' => 'Seek knowledge from the cradle to the grave.',
-            'source' => ' Muhammad (PBUH)'
-        ],
-        [
-            'quote' => 'The ink of the scholar is more sacred than the blood of the martyr.',
-            'source' => '(PBUH)'
-        ],
-        [
-            'quote' => 'Kindness is a mark of faith, and whoever is not kind has no faith.',
-            'source' => 'Prophet Muhammad (PBUH)'
-        ],
-    ];
-
-    $listOfVideos = [
-        [
-            'title' => 'Similarities between Jesus and Muhammad',
-            'description' => 'Explore the common ground and shared values in their teachings.',
-            'url' => 'https://www.youtube.com/embed/Ea1gVO53lDY?si=jt7RveIIxIDfFdWa'
-        ],
-        [
-            'title' => 'Understanding the Five Pillars of Islam',
-            'description' => 'A deep dive into the fundamental beliefs and practices of Islam.',
-            'url' => 'https://www.youtube.com/embed/3h4b8j9XG2A?si=example2'
-        ],
-        [
-            'title' => 'The Life of Prophet Muhammad',
-            'description' => 'An exploration of the life and teachings of the Prophet Muhammad.',
-            'url' => 'https://www.youtube.com/embed/5d6c7e8f9g0?si=example3'
-        ],
-    ];
-
-    return view('index', ['wisdoms' => $listOfWisdom, 'videos' => $listOfVideos]);
-});
 
 Route::get('/about', function () {
     return view('about.index');
