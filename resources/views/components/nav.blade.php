@@ -62,6 +62,7 @@
                             <a class="text-sm font-medium hover:text-primary transition-colors" href="/islam">Islam</a>
                             <a class="text-sm font-medium hover:text-primary transition-colors" href="/video">Videos</a>
                             <a class="text-sm font-medium hover:text-primary transition-colors" href="/article">Articles</a>
+                            <a class="text-sm font-medium hover:text-primary transition-colors" href="/others">Links</a>
                         </nav>
                         <div class="flex items-center gap-2">
                             <button class="flex items-center gap-2 px-4 h-10 rounded-lg bg-gray-100 dark:bg-gray-800 text-sm font-bold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
@@ -81,32 +82,22 @@
 
             <footer class="bg-gray-100 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
                 <div class="max-w-7xl mx-auto py-12 px-4 md:px-6 lg:px-8">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="flex flex-col md:flex-row md:justify-between gap-8">
                         <div>
                             <h3 class="font-bold text-lg mb-4">Contact Us</h3>
-                            <p class="mb-2">info@peacefe.org</p>
-                            <p>123 Peace Street, Harmony City</p>
+                            <p class="mb-2">info@peacefe.com</p>
+                            <p>PCJW+99P, Manda sesh bridge, Dhaka</p>
                         </div>
                         <div>
                             <h3 class="font-bold text-lg mb-4">Follow Us</h3>
                             <div class="flex space-x-4 mb-4">
-                                <a href="#" class="hover:text-primary">Facebook</a>
-                                <a href="#" class="hover:text-primary">Twitter</a>
-                                <a href="#" class="hover:text-primary">Instagram</a>
+                                <a href="https://www.facebook.com/islamidawahinstitutebangladesh/" class="hover:text-primary">Facebook</a>
                             </div>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-lg mb-4">Newsletter</h3>
-                            <p class="mb-4 text-sm">Subscribe for updates and inspirational content.</p>
-                            <form class="flex">
-                                <input class="flex-1 rounded-l-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-2" placeholder="Your email" type="email" />
-                                <button class="bg-primary text-white px-4 rounded-r-lg font-bold hover:bg-primary/90" type="submit">Subscribe</button>
-                            </form>
                         </div>
                     </div>
                     <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 text-center">
                         <p class="mb-2 italic text-sm">"Indeed, with hardship, there is ease." (Quran 94:6)</p>
-                        <p class="text-sm">© 2024 Peacefe. All Rights Reserved.</p>
+                        <p class="text-sm">© 2025 Peacefe. All Rights Reserved.</p>
                     </div>
                 </div>
             </footer>

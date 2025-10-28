@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\VideoController;
 use App\Http\Controllers\WisdomController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,37 +50,11 @@ Route::get('/islam', function () {
     return view('islam.index');
 });
 
-Route::get('/video', function () {
-
-    $listOfCategories = [
-        'All',
-        'Prophet Muhammad (PBUH)',
-        'Islamic Teachings',
-        'History of Islam',
-        'Interfaith Dialogue',
-        'Contemporary Issues'
-    ];
-
-    $listOfVideos = [
-        [
-            'title' => 'Similarities between Jesus and Muhammad',
-            'description' => 'Explore the common ground and shared values in their teachings.',
-            'url' => 'https://www.youtube.com/embed/Ea1gVO53lDY?si=jt7RveIIxIDfFdWa'
-        ],
-        [
-            'title' => 'Understanding the Five Pillars of Islam',
-            'description' => 'A deep dive into the fundamental beliefs and practices of Islam.',
-            'url' => 'https://www.youtube.com/embed/3h4b8j9XG2A?si=example2'
-        ],
-        [
-            'title' => 'The Life of Prophet Muhammad',
-            'description' => 'An exploration of the life and teachings of the Prophet Muhammad.',
-            'url' => 'https://www.youtube.com/embed/5d6c7e8f9g0?si=example3'
-        ],
-    ];
-
-    return view('video.index', ['categories' => $listOfCategories, 'videos' => $listOfVideos]);
-});
+Route::get('/video', [VideoController::class, 'getAllVideos']);
 
 Route::get('/article', [ArticleController::class, 'getArticles']);
 Route::get('/article/{id}', [ArticleController::class, 'getArticle'])->name('article.details');
+
+Route::get('/others', function () {
+    return view('links.index');
+});
