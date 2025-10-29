@@ -35,13 +35,12 @@ Route::get('/admin/article/new', function () {
 })->name('new_article');
 
 
-Route::get('/admin/videos', function () {
-    return view('admin.content.video.index');
-});
+Route::get('/admin/videos', [VideoController::class, 'getAllVideosForAdmin'])->name('admin.videos');
+Route::post('/admin/video/create', [VideoController::class, 'addVideo'])->name('video.add');
+Route::get('/admin/video/delete/{id}', [VideoController::class, 'deleteVideo'])->name('admin.video.delete');
+Route::put('/admin/video/update/{id}', [VideoController::class, 'updateVideo'])->name('admin.video.update');
 
-Route::get('/admin/video/new', function () {
-    return view('admin.content.video.new_video');
-})->name('new_video');
+Route::get('/admin/video/edit/{id}', [VideoController::class, 'getVideoDetails'])->name('admin.video.edit');
 
 Route::get('/admin/wisdoms', [WisdomController::class, 'showWisdomForAdmin'])->name('admin.wisdoms');
 Route::post('/admin/wisdom/create', [WisdomController::class, 'createWisdom'])->name('admin.wisdom.create');

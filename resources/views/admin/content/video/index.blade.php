@@ -2,110 +2,89 @@
 
     <body class="bg-light">
         <div class="container my-5">
+            <!-- Header -->
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2>Manage Videos</h2>
-                <button class="btn btn-primary" onclick="window.location.href='{{route('new_video')}}'">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
-                    </svg>
-                    Add New Video
+                <h2 class="fw-bold text-primary">Manage Videos</h2>
+                <button class="btn btn-primary d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#addVideoModal">
+                    <i class="bi bi-plus-lg"></i> Add New Video
                 </button>
             </div>
 
+            <!-- Video Grid -->
             <div class="row g-4">
+                @foreach ($videos as $video)
                 <div class="col-md-6 col-lg-4">
-                    <div class="card shadow-sm h-100">
+                    <div class="card shadow-sm h-100 border-0 rounded-4 overflow-hidden hover-shadow">
                         <div class="ratio ratio-16x9">
-                            <iframe src="https://www.youtube.com/embed/Ea1gVO53lDY?si=jt7RveIIxIDfFdWa" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe src="{{ $video->video_url }}" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Similarities between Jesus and Muhammad</h5>
-                            <p class="card-text text-muted">Explore the common ground and shared values in their teachings.</p>
-                        </div>
-                        <div class="card-footer bg-white border-top">
-                            <button class="btn btn-sm btn-outline-primary me-2" onclick="editVideo(1)">Edit</button>
-                            <button class="btn btn-sm btn-outline-danger" onclick="deleteVideo(1)">Delete</button>
-                        </div>
-                    </div>
-                </div>
+                            <h5 class="card-title">{{ $video->title }}</h5>
+                            <span class="badge bg-secondary mb-2">{{ $video->category }}</span>
+                            <p class="card-text text-muted" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                {{ $video->description }}
+                            </p>
 
-                <div class="col-md-6 col-lg-4">
-                    <div class="card shadow-sm h-100">
-                        <div class="ratio ratio-16x9">
-                            <iframe src="https://www.youtube.com/embed/3h4b8j9XG2A?si=example2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Understanding the Five Pillars of Islam</h5>
-                            <p class="card-text text-muted">A deep dive into the fundamental beliefs and practices of Islam.</p>
-                        </div>
-                        <div class="card-footer bg-white border-top">
-                            <button class="btn btn-sm btn-outline-primary me-2" onclick="editVideo(2)">Edit</button>
-                            <button class="btn btn-sm btn-outline-danger" onclick="deleteVideo(2)">Delete</button>
+                        <div class="card-footer bg-white border-top d-flex justify-content-between">
+                            <a href="{{ route('admin.video.edit', $video->id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+                            <a href="{{ route('admin.video.delete', $video->id) }}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">Delete</a>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-6 col-lg-4">
-                    <div class="card shadow-sm h-100">
-                        <div class="ratio ratio-16x9">
-                            <iframe src="https://www.youtube.com/embed/5d6c7e8f9g0?si=example3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">The Life of Prophet Muhammad</h5>
-                            <p class="card-text text-muted">An exploration of the life and teachings of the Prophet Muhammad.</p>
-                        </div>
-                        <div class="card-footer bg-white border-top">
-                            <button class="btn btn-sm btn-outline-primary me-2" onclick="editVideo(3)">Edit</button>
-                            <button class="btn btn-sm btn-outline-danger" onclick="deleteVideo(3)">Delete</button>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
+        </div>
 
-            <!-- Delete Confirmation Modal -->
-            <div class="modal fade" id="deleteModal" tabindex="-1">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Confirm Delete</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
+        <!-- Add Video Modal -->
+        <div class="modal fade" id="addVideoModal" tabindex="-1" aria-labelledby="addVideoModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 shadow-sm rounded-4">
+                    <div class="modal-header bg-primary text-white">
+                        <h5 class="modal-title" id="addVideoModalLabel">Add New Video</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('video.add') }}" method="POST">
+                        @csrf
                         <div class="modal-body">
-                            Are you sure you want to delete this video? This action cannot be undone.
+                            <div class="mb-3">
+                                <label for="title" class="form-label fw-semibold">Title</label>
+                                <input type="text" class="form-control" id="title" name="title" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="category" class="form-label fw-semibold">Category</label>
+                                <input type="text" class="form-control" id="category" name="category" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="description" class="form-label fw-semibold">Description</label>
+                                <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="video_url" class="form-label fw-semibold">Video URL</label>
+                                <input type="url" class="form-control" id="video_url" name="video_url" placeholder="https://www.youtube.com/embed/..." required>
+                            </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-danger" id="confirmDelete">Delete</button>
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save Video</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
+        </div>
 
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-            <script>
-                let deleteModal;
-                let videoToDelete;
+        <!-- Bootstrap JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 
-                document.addEventListener('DOMContentLoaded', function() {
-                    deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-                });
-
-                function editVideo(id) {
-                    alert('Edit video ID: ' + id + '\n\nIn production, this would redirect to the edit page.');
-                    // window.location.href = '/edit-video/' + id;
-                }
-
-                function deleteVideo(id) {
-                    videoToDelete = id;
-                    deleteModal.show();
-                }
-
-                document.getElementById('confirmDelete').addEventListener('click', function() {
-                    alert('Video ID ' + videoToDelete + ' deleted successfully!');
-                    deleteModal.hide();
-                    // In production, send delete request to server
-                    // Then remove the card from page or reload
-                });
-            </script>
+        <style>
+            /* hover effect for cards */
+            .hover-shadow:hover {
+                transform: translateY(-4px);
+                transition: 0.3s;
+                box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+            }
+        </style>
     </body>
 </x-adminnav>
