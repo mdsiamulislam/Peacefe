@@ -1,42 +1,38 @@
-<x-adminnav>
-
-    <body class="bg-light">
-        <div class="container my-5">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="fw-bold">Manage Wisdom</h2>
-                <a href="{{ route('new_wisdom') }}" class="btn btn-primary d-flex align-items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
-                    </svg>
-                    Add New Wisdom
+<x-adminsidebar>
+    <main class="flex-1 p-8 bg-gray-50 dark:bg-gray-900 min-h-screen">
+        <div class="max-w-5xl mx-auto">
+            <!-- Header -->
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-primary">Manage Wisdom</h2>
+                <a href="{{ route('new_wisdom') }}" class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:opacity-90 transition">
+                    <span class="material-symbols-outlined">add</span> Add New Wisdom
                 </a>
             </div>
 
-            <div class="row g-4">
+            <!-- Wisdom Cards -->
+            <div class="grid md:grid-cols-2 gap-6">
                 @foreach($wisdoms as $wisdom)
-                <div class="col-md-6">
-                    <div class="card shadow-sm h-100 border-0 rounded-4">
-                        <div class="card-body">
-                            <blockquote class="blockquote mb-4">
-                                <p class="fst-italic fs-5">{{ $wisdom->content }}</p>
-                                <footer class="blockquote-footer text-muted">{{ $wisdom->author }}</footer>
-                            </blockquote>
-                        </div>
-                        <div class="card-footer bg-white border-top d-flex justify-content-end gap-2">
-                            <a href="{{ route('admin.wisdom.edit', ['id' => $wisdom->id]) }}" class="btn btn-sm btn-outline-primary fw-semibold">
-                                Edit
-                            </a>
-                            <a href="{{ route('admin.wisdom.delete', ['id' => $wisdom->id]) }}" class="btn btn-sm btn-outline-danger fw-semibold"
-                                onclick="return confirm('Are you sure you want to delete this wisdom?');">
-                                Delete
-                            </a>
-                        </div>
+                <div class="bg-white dark:bg-gray-800 shadow-sm rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
+                    <div class="p-4">
+                        <blockquote class="text-gray-700 dark:text-gray-200 italic text-lg">
+                            "{{ $wisdom->content }}"
+                        </blockquote>
+                        <footer class="mt-2 text-sm text-gray-500 dark:text-gray-400">— {{ $wisdom->author }}</footer>
+                    </div>
+                    <div class="flex justify-end gap-2 p-3 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                        <a href="{{ route('admin.wisdom.edit', ['id' => $wisdom->id]) }}" class="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition font-medium">
+                            Edit
+                        </a>
+                        <a href="{{ route('admin.wisdom.delete', ['id' => $wisdom->id]) }}" onclick="return confirm('Are you sure you want to delete this wisdom?');" class="px-3 py-1 border border-red-500 text-red-600 rounded hover:bg-red-50 dark:hover:bg-red-700 transition font-medium">
+                            Delete
+                        </a>
                     </div>
                 </div>
                 @endforeach
             </div>
         </div>
 
+        <!-- Bootstrap JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-    </body>
-</x-adminnav>
+    </main>
+</x-adminsidebar>
