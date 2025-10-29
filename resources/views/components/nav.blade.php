@@ -81,6 +81,25 @@
         </main>
 
     </div>
+    <footer class="bg-gray-100 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto py-12 px-4 md:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:justify-between gap-8">
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Contact Us</h3>
+                    <p class="mb-2">info@peacefe.com</p>
+                    <p>PCJW+99P, Manda sesh bridge, Dhaka</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Follow Us</h3>
+                    <div class="flex space-x-4 mb-4"> <a href="https://www.facebook.com/islamidawahinstitutebangladesh/" class="hover:text-primary">Facebook</a> </div>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 text-center">
+                <p class="mb-2 italic text-sm">"Indeed, with hardship, there is ease." (Quran 94:6)</p>
+                <p class="text-sm">© 2025 Peacefe. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
         const hamburgerBtn = document.getElementById('hamburgerBtn');
