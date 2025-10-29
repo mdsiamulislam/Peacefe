@@ -84,6 +84,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{ url('admin/wisdoms') }}"><i class="bi bi-lightbulb-fill me-1"></i>Wisdom</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('admin/articles') }}"><i class="bi bi-journal-text me-1"></i>Articles</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('admin/videos') }}"><i class="bi bi-camera-video-fill me-1"></i>Videos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/admin/links') }}"><i class="bi bi-link-45deg me-1"></i>Links</a></li>
                     <li class="nav-item">
                         <a href="#" class="btn btn-logout ms-lg-3 mt-2 mt-lg-0">
                             <i class="bi bi-box-arrow-right me-1"></i>Logout

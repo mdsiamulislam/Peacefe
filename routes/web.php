@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\LinkController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\WisdomController;
@@ -52,6 +53,12 @@ Route::get('/admin/wisdom/new', function () {
     return view('admin.wisdom.new_wisdom');
 })->name('new_wisdom');
 
+Route::prefix('admin')->group(function () {
+    Route::get('/links', [LinkController::class, 'index'])->name('admin.links');
+    Route::post('/links/create', [LinkController::class, 'createExternalLink'])->name('admin.links.create');
+    Route::get('/links/{id}', [LinkController::class, 'deleteLink'])->name('admin.links.delete');
+});
+
 
 
 Route::get('/', [WisdomController::class, 'showWisdom']);
@@ -70,6 +77,4 @@ Route::get('/video', [VideoController::class, 'getAllVideos']);
 Route::get('/article', [ArticleController::class, 'getArticles']);
 Route::get('/article/{id}', [ArticleController::class, 'getArticle'])->name('article.details');
 
-Route::get('/others', function () {
-    return view('links.index');
-});
+Route::get('/others', [LinkController::class, 'getLinks'])->name('links.index');
