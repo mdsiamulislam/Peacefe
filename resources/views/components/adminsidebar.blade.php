@@ -66,15 +66,15 @@
                         <span class="material-symbols-outlined">dashboard</span>
                         <p class="text-sm font-medium">Dashboard</p>
                     </a>
-                    <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-subtext-light dark:text-subtext-dark hover:bg-primary/20 hover:text-text-light dark:hover:text-text-dark transition-colors" href="admin/articles">
+                    <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-subtext-light dark:text-subtext-dark hover:bg-primary/20 hover:text-text-light dark:hover:text-text-dark transition-colors" href="/admin/articles">
                         <span class="material-symbols-outlined">article</span>
                         <p class="text-sm font-medium">Manage Article</p>
                     </a>
-                    <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-subtext-light dark:text-subtext-dark hover:bg-primary/20 hover:text-text-light dark:hover:text-text-dark transition-colors" href="admin/videos">
+                    <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-subtext-light dark:text-subtext-dark hover:bg-primary/20 hover:text-text-light dark:hover:text-text-dark transition-colors" href="/admin/videos">
                         <span class="material-symbols-outlined">smart_display</span>
                         <p class="text-sm font-medium">Manage Videos</p>
                     </a>
-                    <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-subtext-light dark:text-subtext-dark hover:bg-primary/20 hover:text-text-light dark:hover:text-text-dark transition-colors" href="admin/wisdoms">
+                    <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-subtext-light dark:text-subtext-dark hover:bg-primary/20 hover:text-text-light dark:hover:text-text-dark transition-colors" href="/admin/wisdoms">
                         <span class="material-symbols-outlined">format_quote</span>
                         <p class="text-sm font-medium">Manage Quotes</p>
                     </a>
@@ -82,17 +82,13 @@
                         <span class="material-symbols-outlined">picture_as_pdf</span>
                         <p class="text-sm font-medium">Manage PDFs</p>
                     </a>
-                    <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-subtext-light dark:text-subtext-dark hover:bg-primary/20 hover:text-text-light dark:hover:text-text-dark transition-colors" href="#">
-                        <span class="material-symbols-outlined">group</span>
-                        <p class="text-sm font-medium">Users / Subscribers</p>
-                    </a>
-                    <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-subtext-light dark:text-subtext-dark hover:bg-primary/20 hover:text-text-light dark:hover:text-text-dark transition-colors" href="#">
+                    <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-subtext-light dark:text-subtext-dark hover:bg-primary/20 hover:text-text-light dark:hover:text-text-dark transition-colors" href="/admin/home/config">
                         <span class="material-symbols-outlined">tune</span>
                         <p class="text-sm font-medium">Settings</p>
                     </a>
-                    <a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/20 text-primary transition-colors" href="#">
-                        <span class="material-symbols-outlined !font-bold">link</span>
-                        <p class="text-sm font-bold">Manage External Links</p>
+                    <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-subtext-light dark:text-subtext-dark hover:bg-primary/20 hover:text-text-light dark:hover:text-text-dark transition-colors" href="/admin/links">
+                        <span class="material-symbols-outlined">link</span>
+                        <p class="text-sm font-medium">External Links</p>
                     </a>
                 </nav>
             </div>

@@ -1,39 +1,42 @@
-<x-adminnav>
+<x-adminsidebar>
+    <main class="flex-1 p-8 bg-gray-50 dark:bg-gray-900 min-h-screen">
+        <div class="max-w-7xl mx-auto">
 
-    <body class="bg-light">
-        <div class="container my-5">
             <!-- Header -->
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="fw-bold text-primary">Manage Videos</h2>
-                <button class="btn btn-primary d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#addVideoModal">
-                    <i class="bi bi-plus-lg"></i> Add New Video
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Manage Videos</h2>
+                <button class="bg-primary text-white px-4 py-2 rounded-lg hover:opacity-90"
+                        data-bs-toggle="modal" data-bs-target="#addVideoModal">
+                    <span class="material-symbols-outlined align-middle">add</span> Add New Video
                 </button>
             </div>
 
             <!-- Video Grid -->
-            <div class="row g-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($videos as $video)
-                <div class="col-md-6 col-lg-4">
-                    <div class="card shadow-sm h-100 border-0 rounded-4 overflow-hidden hover-shadow">
-                        <div class="ratio ratio-16x9">
+                    <div class="bg-white dark:bg-gray-800 shadow rounded-xl overflow-hidden hover:scale-105 transition-transform duration-200">
+                        <div class="aspect-video">
                             <iframe src="{{ $video->video_url }}" frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen class="w-full h-full"></iframe>
                         </div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $video->title }}</h5>
-                            <span class="badge bg-secondary mb-2">{{ $video->category }}</span>
-                            <p class="card-text text-muted" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                {{ $video->description }}
-                            </p>
-
+                        <div class="p-4">
+                            <h5 class="text-lg font-semibold text-gray-900 dark:text-gray-100">{{ $video->title }}</h5>
+                            <span class="inline-block bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm mb-2">{{ $video->category }}</span>
+                            <p class="text-gray-600 dark:text-gray-300 truncate">{{ $video->description }}</p>
                         </div>
-                        <div class="card-footer bg-white border-top d-flex justify-content-between">
-                            <a href="{{ route('admin.video.edit', $video->id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
-                            <a href="{{ route('admin.video.delete', $video->id) }}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                        <div class="flex justify-between items-center p-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                            <a href="{{ route('admin.video.edit', $video->id) }}"
+                               class="px-3 py-1 text-sm border border-primary text-primary rounded hover:bg-primary hover:text-white transition">
+                                Edit
+                            </a>
+                            <a href="{{ route('admin.video.delete', $video->id) }}"
+                               onclick="return confirm('Are you sure you want to delete this video?')"
+                               class="px-3 py-1 text-sm border border-red-500 text-red-500 rounded hover:bg-red-500 hover:text-white transition">
+                                Delete
+                            </a>
                         </div>
                     </div>
-                </div>
                 @endforeach
             </div>
         </div>
@@ -41,34 +44,30 @@
         <!-- Add Video Modal -->
         <div class="modal fade" id="addVideoModal" tabindex="-1" aria-labelledby="addVideoModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content border-0 shadow-sm rounded-4">
-                    <div class="modal-header bg-primary text-white">
-                        <h5 class="modal-title" id="addVideoModalLabel">Add New Video</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form action="{{ route('video.add') }}" method="POST">
+                <div class="modal-content rounded-xl shadow-lg dark:bg-gray-800 border-0">
+                    
+                    <form action="{{ route('video.add') }}" method="POST" class="p-4 flex flex-col gap-4">
                         @csrf
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <label for="title" class="form-label fw-semibold">Title</label>
-                                <input type="text" class="form-control" id="title" name="title" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="category" class="form-label fw-semibold">Category</label>
-                                <input type="text" class="form-control" id="category" name="category" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="description" class="form-label fw-semibold">Description</label>
-                                <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="video_url" class="form-label fw-semibold">Video URL</label>
-                                <input type="url" class="form-control" id="video_url" name="video_url" placeholder="https://www.youtube.com/embed/..." required>
-                            </div>
+                        <div class="flex flex-col">
+                            <label class="font-medium mb-1" for="title">Title</label>
+                            <input type="text" name="title" id="title" class="form-input rounded-lg p-2 border border-gray-300" required>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Save Video</button>
+                        <div class="flex flex-col">
+                            <label class="font-medium mb-1" for="category">Category</label>
+                            <input type="text" name="category" id="category" class="form-input rounded-lg p-2 border border-gray-300" required>
+                        </div>
+                        <div class="flex flex-col">
+                            <label class="font-medium mb-1" for="description">Description</label>
+                            <textarea name="description" id="description" rows="3" class="form-input rounded-lg p-2 border border-gray-300" required></textarea>
+                        </div>
+                        <div class="flex flex-col">
+                            <label class="font-medium mb-1" for="video_url">Video URL</label>
+                            <input type="url" name="video_url" id="video_url" placeholder="https://www.youtube.com/embed/..."
+                                   class="form-input rounded-lg p-2 border border-gray-300" required>
+                        </div>
+                        <div class="flex justify-end gap-2 mt-4">
+                            <button type="button" class="px-4 py-2 rounded-lg bg-gray-400 text-white hover:opacity-90" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="px-4 py-2 rounded-lg bg-primary text-white hover:opacity-90">Save Video</button>
                         </div>
                     </form>
                 </div>
@@ -77,14 +76,5 @@
 
         <!-- Bootstrap JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-
-        <style>
-            /* hover effect for cards */
-            .hover-shadow:hover {
-                transform: translateY(-4px);
-                transition: 0.3s;
-                box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
-            }
-        </style>
-    </body>
-</x-adminnav>
+    </main>
+</x-adminsidebar>

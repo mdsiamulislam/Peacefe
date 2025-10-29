@@ -1,118 +1,69 @@
-<x-adminnav>
+<x-adminsidebar>
+    <main class="flex-1 p-8 bg-gray-50 dark:bg-gray-900 min-h-screen">
+        <div class="max-w-3xl mx-auto">
+            <div class="bg-white dark:bg-gray-800 shadow-sm rounded-xl overflow-hidden">
+                <!-- Header -->
+                <div class="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                    <h4 class="text-xl font-semibold text-primary">Edit Video</h4>
+                    <a href="{{ route('admin.videos') }}" class="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                        <span class="material-symbols-outlined align-middle">arrow_back</span> Back
+                    </a>
+                </div>
 
-    <body class="bg-light">
-        <div class="container my-5">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
-                        <!-- Header -->
-                        <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
-                            <h4 class="mb-0 fw-semibold text-primary">Edit Video</h4>
-                            <a href="{{ route('admin.videos') }}" class="btn btn-sm btn-outline-secondary">
-                                <i class="bi bi-arrow-left"></i> Back
-                            </a>
+                <!-- Form Body -->
+                <div class="p-6">
+                    <form action="{{ route('admin.video.update', $video->id) }}" method="POST" class="flex flex-col gap-4" novalidate>
+                        @csrf
+                        @method('PUT')
+
+                        <!-- Title -->
+                        <div class="flex flex-col">
+                            <label for="title" class="font-medium mb-1">Title</label>
+                            <input type="text" id="title" name="title" value="{{ old('title', $video->title) }}" class="form-input rounded-lg p-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100" placeholder="Enter video title" required>
                         </div>
 
-                        <!-- Form Body -->
-                        <div class="card-body p-4 bg-light">
-                            <form
-                                action="{{ route('admin.video.update', $video->id) }}"
-                                method="POST"
-                                id="videoForm"
-                                class="needs-validation"
-                                novalidate>
-                                @csrf
-                                @method('PUT')
-
-                                <!-- Title -->
-                                <div class="mb-3">
-                                    <label for="title" class="form-label fw-semibold">Title</label>
-                                    <input
-                                        type="text"
-                                        class="form-control form-control-lg"
-                                        id="title"
-                                        name="title"
-                                        placeholder="Enter video title"
-                                        value="{{ old('title', $video->title) }}"
-                                        required>
-                                    <div class="invalid-feedback">Please enter a title.</div>
-                                </div>
-
-                                <!-- Category -->
-                                <div class="mb-3">
-                                    <label for="category" class="form-label fw-semibold">Category</label>
-                                    <input
-                                        type="text"
-                                        class="form-control form-control-lg"
-                                        id="category"
-                                        name="category"
-                                        placeholder="Enter video category"
-                                        value="{{ old('category', $video->category) }}"
-                                        required>
-                                    <div class="invalid-feedback">Please enter a category.</div>
-                                </div>
-
-                                <!-- Description -->
-                                <div class="mb-3">
-                                    <label for="description" class="form-label fw-semibold">Description</label>
-                                    <textarea
-                                        class="form-control"
-                                        id="description"
-                                        name="description"
-                                        rows="4"
-                                        placeholder="Enter video description"
-                                        required>{{ old('description', $video->description) }}</textarea>
-                                    <div class="invalid-feedback">Please enter a description.</div>
-                                </div>
-
-                                <!-- Video URL -->
-                                <div class="mb-3">
-                                    <label for="url" class="form-label fw-semibold">YouTube Embed URL</label>
-                                    <input
-                                        type="url"
-                                        class="form-control form-control-lg"
-                                        id="url"
-                                        name="video_url"
-                                        placeholder="https://www.youtube.com/embed/VIDEO_ID"
-                                        value="{{ old('video_url', $video->video_url) }}"
-                                        required>
-                                    <div class="form-text text-muted">
-                                        Example: <code>https://www.youtube.com/embed/VIDEO_ID</code>
-                                    </div>
-                                    <div class="invalid-feedback">Please enter a valid YouTube embed URL.</div>
-                                </div>
-
-                                <!-- Preview -->
-                                <div class="mb-4">
-                                    <label class="form-label fw-semibold">Preview</label>
-                                    <div class="ratio ratio-16x9 bg-dark rounded overflow-hidden shadow-sm">
-                                        <iframe
-                                            id="preview"
-                                            src="{{ $video->video_url }}"
-                                            frameborder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowfullscreen></iframe>
-                                    </div>
-                                </div>
-
-                                <!-- Buttons -->
-                                <div class="d-flex gap-3">
-                                    <button type="submit" class="btn btn-primary px-4">
-                                        <i class="bi bi-save"></i> Update Video
-                                    </button>
-                                    <button type="button" class="btn btn-outline-secondary px-4"
-                                        onclick="window.location.href='{{ route('admin.videos') }}'">
-                                        <i class="bi bi-x-circle"></i> Cancel
-                                    </button>
-                                </div>
-                            </form>
+                        <!-- Category -->
+                        <div class="flex flex-col">
+                            <label for="category" class="font-medium mb-1">Category</label>
+                            <input type="text" id="category" name="category" value="{{ old('category', $video->category) }}" class="form-input rounded-lg p-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100" placeholder="Enter video category" required>
                         </div>
-                    </div>
+
+                        <!-- Description -->
+                        <div class="flex flex-col">
+                            <label for="description" class="font-medium mb-1">Description</label>
+                            <textarea id="description" name="description" rows="4" class="form-input rounded-lg p-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100" placeholder="Enter video description" required>{{ old('description', $video->description) }}</textarea>
+                        </div>
+
+                        <!-- Video URL -->
+                        <div class="flex flex-col">
+                            <label for="video_url" class="font-medium mb-1">YouTube Embed URL</label>
+                            <input type="url" id="video_url" name="video_url" value="{{ old('video_url', $video->video_url) }}" class="form-input rounded-lg p-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100" placeholder="https://www.youtube.com/embed/VIDEO_ID" required>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Example: <code>https://www.youtube.com/embed/VIDEO_ID</code></p>
+                        </div>
+
+                        <!-- Preview -->
+                        <div class="flex flex-col">
+                            <label class="font-medium mb-1">Preview</label>
+                            <div class="aspect-video rounded-lg overflow-hidden shadow-sm bg-black">
+                                <iframe src="{{ $video->video_url }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>
+                            </div>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="flex gap-3 mt-4">
+                            <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-90 flex items-center gap-2">
+                                <span class="material-symbols-outlined">save</span> Update Video
+                            </button>
+                            <button type="button" onclick="window.location.href='{{ route('admin.videos') }}'" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2">
+                                <span class="material-symbols-outlined">close</span> Cancel
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
 
         <!-- Bootstrap JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-    </body>
-</x-adminnav>
+    </main>
+</x-adminsidebar>

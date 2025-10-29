@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
@@ -54,6 +55,11 @@ Route::get('/admin/wisdom/new', function () {
 })->name('new_wisdom');
 
 Route::prefix('admin')->group(function () {
+    Route::get('/home/config', [ConfigController::class, 'getConfigForHomePage'])->name('admin.home.config');
+
+    Route::post('/home/config/save', [ConfigController::class, 'saveConfigForHomePage'])->name('admin.home.config.save');
+    Route::post('/about/config/save', [ConfigController::class, 'saveConfigForAboutPage'])->name('admin.about.config.save');
+
     Route::get('/links', [LinkController::class, 'index'])->name('admin.links');
     Route::post('/links/create', [LinkController::class, 'createExternalLink'])->name('admin.links.create');
     Route::get('/links/{id}', [LinkController::class, 'deleteLink'])->name('admin.links.delete');
