@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\LinkController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\WisdomController;
@@ -68,11 +69,7 @@ Route::prefix('admin')->group(function () {
 
 
 Route::get('/', [WisdomController::class, 'showWisdom']);
-
-
-Route::get('/about', function () {
-    return view('about.index');
-});
+Route::get('/about', [PageController::class, 'about']);
 
 Route::get('/islam', function () {
     return view('islam.index');
