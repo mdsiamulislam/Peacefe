@@ -1,5 +1,5 @@
 <x-nav>
-    <div class="min-h-screen bg-gray-50 py-12 px-6">
+    <div class="min-h-screen py-12 px-6">
         <div class="max-w-4xl mx-auto">
             <h1 class="text-3xl font-bold text-gray-900 mb-8 text-center">
                 Useful Resources & Quick Links
